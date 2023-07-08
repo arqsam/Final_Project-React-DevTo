@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import Menu from "../components/menu/Menu";
-import Hashtags from "../components/menu/Hashtags";
-import { BookmarkEmpty, ChatBubbleEmpty, Message } from "iconoir-react";
+import CardMain from "../components/CardMain";
+import { BookmarkEmpty, Message } from "iconoir-react";
 
 export default function Home() {
   return (
@@ -47,7 +47,7 @@ export default function Home() {
                 </a>
               </li>
             </ul>
-            <article className="flex flex-col columns-1 border border rounded-xl bg-white shadow-sm">
+            <article className="flex flex-col columns-1 border rounded-xl bg-white shadow-sm mb-2">
               <img
                 src="https://res.cloudinary.com/practicaldev/image/fetch/s--HsQMAsNu--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rk8vycfryt31mh9tkzoe.png"
                 alt="post-image"
@@ -71,9 +71,11 @@ export default function Home() {
                   </button>
                 </div>
                 <div className="pl-[4rem]">
-                  <h1 className="font-bold text-2xl text-gray-900/90">
-                    Integrating Jest Testing into an Existing Vue 3 Project with
-                    ViteJs
+                  <h1 className="font-bold text-2xl text-gray-900/90  hover:text-indigo-800">
+                    <a href="">
+                      Integrating Jest Testing into an Existing Vue 3 Project
+                      with ViteJs
+                    </a>
                   </h1>
                   <div className="flex flex-row rows-4 gap-3 mt-2">
                     <a className="hover:bg-gray-300/30 hover:text-indigo-900 rounded-md p-1">
@@ -89,7 +91,7 @@ export default function Home() {
                       #viteJs
                     </a>
                   </div>
-                  <div className="flex flex-row rows-4 gap-3 mt-2 justify-between">
+                  <div className="flex flex-row rows-4 gap-3 mt-2 justify-between mb-4">
                     <button className="flex flex-row gap-20 hover:bg-gray-300/30 rounded-md p-1">
                       <div className="flex flex-row w-1 p-1">
                         <p className="w-7 bg-slate-400/20 rounded-full z-30">
@@ -117,21 +119,38 @@ export default function Home() {
                         Add comment{" "}
                       </p>
                     </button>
-                    <div className="flex flex-row pr-2">
+                    <div className="flex flex-row pr-4">
                       <p className="text-[12px] mx-1 align-middle mt-[14px] whitespace-nowrap">
                         4 min read
                       </p>
                       <button>
-                        <BookmarkEmpty className="w-[19px] h-[19px] stroke-[2px] mt-2" />
+                        <BookmarkEmpty className="w-[19px] h-[19px] stroke-[2px] mt-2 hover:bg-gray-300/30 rounded-md" />
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
             </article>
+            <section>
+              <CardMain
+                userName="Any Person"
+                title="Best way to prepare for coding interviews in 2023?"
+                hashtag="#react"
+              ></CardMain>
+              <CardMain
+                userName="Other Person"
+                title="Learn React.js: A Complete Guide to Proposals, Components, Functional Components, State, React.js Hooks, and Redux"
+                hashtag="#react"
+              ></CardMain>
+            </section>
           </main>
           <aside className="hidden md:flex md:col-span-3 md:col-start-10 md:row-span-3 border-helper">
-            Cards Aside
+            <section>
+              <div>
+                <h1>Listings</h1>
+                <p>See all</p>
+              </div>
+            </section>
           </aside>
         </div>
         <footer className="grid grid-cols-12 border-helper">Footer</footer>
