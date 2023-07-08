@@ -145,11 +145,17 @@ export default function Home() {
             </section>
           </main>
           <aside className="hidden md:flex md:col-span-3 md:col-start-10 md:row-span-3 border-helper">
-            <section>
-              <div>
-                <h1>Listings</h1>
-                <p>See all</p>
+            <section className="w-screen flex flex-col bg-white rounded-xl pt-1">
+              <div className="flex flex-row justify-between py-4 border-b-[1.5px] border-gray-600/20 align-middle">
+                <h1 className="font-bold text-xl px-2">Listings</h1>
+                <a
+                  href=""
+                  className="px-2 mt-1 text-[14px] text-indigo-700 hover:text-indigo-900 hover:underline font-semibold"
+                >
+                  See all
+                </a>
               </div>
+              <div></div>
             </section>
           </aside>
         </div>
