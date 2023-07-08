@@ -87,15 +87,17 @@ export default function Menu() {
           <p>My Tags</p>
           <Svg3DSelectPoint className="w-[26px] h-[26px] stroke-[2px]  hover:text-indigo-800" />
         </header>
-        <div className="h-20 overflow-y-auto flex flex-col gap-2">
+        <div className="h-[9rem] overflow-y-auto flex flex-col gap-2">
           <Hashtags text="#devTo" />
           <Hashtags text="#react" />
           <Hashtags text="#coding" />
           <Hashtags text="#javascript" />
           <Hashtags text="#twitter" />
+          <Hashtags text="#github" />
+          <Hashtags text="#kodemia" />
         </div>
       </nav>
-      <article className="h-[15rem] overflow-y-auto flex flex-col mt-4 border bg-white rounded-xl shadow-md">
+      <article className="h-[16rem] overflow-y-auto flex flex-col mt-4 border bg-white rounded-xl shadow-md">
         <div className="grid grid-cols-2 p-2 gap-4">
           <p className="whitespace-nowrap"> DEV Community </p>
           <button className="justify-between hover:bg-slate-600/20 font-bold mx-9 rounded-md">
