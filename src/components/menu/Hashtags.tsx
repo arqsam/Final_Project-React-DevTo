@@ -2,7 +2,7 @@ interface Props {
   text: string;
 }
 
-export default function ListElement(props: Props) {
+export default function Hashtags(props: Props) {
   return (
     <a
       href=""

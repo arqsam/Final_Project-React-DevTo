@@ -95,7 +95,7 @@ export default function Menu() {
           <Hashtags text="#twitter" />
         </div>
       </nav>
-      <article className="h-[12rem] overflow-y-auto flex flex-col mt-4 border border-gray-600/30 bg-white rounded-xl">
+      <article className="h-[15rem] overflow-y-auto flex flex-col mt-4 border bg-white rounded-xl shadow-md">
         <div className="grid grid-cols-2 p-2 gap-4">
           <p className="whitespace-nowrap"> DEV Community </p>
           <button className="justify-between hover:bg-slate-600/20 font-bold mx-9 rounded-md">
@@ -118,7 +118,7 @@ export default function Menu() {
           Join our newsletter community and never miss a beat.
         </a>
       </article>
-      <article className="h-auto flex flex-col mt-4 pb-4 border border-gray-600/30 bg-white rounded-xl">
+      <article className="h-auto flex flex-col mt-4 pb-4  border bg-white rounded-xl shadow-md">
         <div className="grid grid-cols-2 p-2 gap-4">
           <p className="whitespace-nowrap"> DEV Community </p>
           <button className="justify-between hover:bg-slate-600/20 font-bold mx-9 rounded-md">
