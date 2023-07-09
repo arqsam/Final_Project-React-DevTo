@@ -180,7 +180,7 @@ export default function Post() {
                 </div>
               </p>
             </article>
-            <section className="w-auto h-auto flex flex-col bg-white rounded-xl pt-1 border shadow-md">
+            <section className="w-auto h-auto flex flex-col bg-white rounded-xl pt-1 border shadow-md py-3">
               <div className="flex flex-row justify-center py-4 border-b-[1.5px] border-gray-600/20 align-middle">
                 <h1 className="font-bold text-lg px-2">
                   Trending on{" "}
