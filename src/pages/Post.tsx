@@ -2,6 +2,7 @@ import Comments from "../components/Comments";
 import MenuPost from "../components/MenuPost";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
 import { Message, BookmarkEmpty } from "iconoir-react";
 import CardAsidePost from "../components/CardAsidePost";
 

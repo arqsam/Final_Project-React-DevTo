@@ -30,8 +30,8 @@ export default function Login() {
       .then((response) => response.json())
       .then((response) => {
         console.log("response:", response);
-        if (response?.token) {
-          localStorage.setItem("token:", response?.token);
+        if (response?.data) {
+          localStorage.setItem("token:", response?.data);
           //para sacar el token y utilizarlo en otro lugar
           /* const token = localStorage.getItem("token"); */
           //para cerrar sesion (borrar el token)

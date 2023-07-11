@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { CreatePostData, Post } from "../types/common.types";
+import clsx from "clsx";
 import {
   Bold,
   Code,
@@ -13,6 +17,53 @@ import {
 } from "iconoir-react";
 
 export default function CreatePost() {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  function getPostsFromApi() {
+    fetch("http://localhost:8080/posts")
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("response", response);
+        setPosts(response.posts);
+      });
+  }
+
+  useEffect(() => {
+    getPostsFromApi();
+  }, []);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<CreatePostData>();
+
+  function onSubmit(data: CreatePostData) {
+    fetch("http://localhost:8080/posts", {
+      method: "POST",
+      body: JSON.stringify({
+        postTitle: data.postTitle,
+        postBody: data.postBody,
+        postImg: data.postImg,
+        postDate: data.postDate,
+        isRelevant: data.isRelevant,
+        likes: data.likes,
+        bookmarks: data.bookmarks,
+        postOwner: data.postOwner,
+        hashtags: {
+          first: data.hashtagsFirst,
+          second: data.hashtagsSecond,
+          third: data.hashtagsThird,
+          fourth: data.hashtagsFourth,
+        },
+      }),
+    }).then(() => {
+      reset();
+      getPostsFromApi();
+    });
+  }
+
   return (
     <>
       <header className="container grid grid-cols-12 h-auto mx-auto  w-screen mt-5">
@@ -38,21 +89,62 @@ export default function CreatePost() {
       <main className="container flex flex-col col-span-1 mx-auto h-auto w-screen mt-4">
         <div className="flex flex-row row-span-6 gap-10 mx-6">
           <section className="w-screen bg-white py-6 rounded-2xl shadow-md">
-            <form action="" className="w-full bg-white">
+            <form
+              action=""
+              className="w-full bg-white"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <button className="boder border-2 border-gray-600/20 shadow-sm mx-8 p-2 rounded-md">
                 {" "}
                 Add cover image
               </button>
               <textarea
-                className="mt-7 w-full h-36 resize-none placeholder:text-black/60 placeholder:px-8 placeholder:py-10 placeholder:font-extrabold placeholder:text-5xl"
                 id="FormControlTextarea1"
                 placeholder="New post title here..."
+                className={clsx(
+                  "mt-7 w-full h-36 resize-none placeholder:text-black/60 placeholder:px-8 placeholder:py-10 placeholder:font-extrabold placeholder:text-5xl",
+                  { "border-red-500": errors.postTitle }
+                )}
+                {...register("postTitle", {
+                  required: { value: true, message: "Title required" },
+                  minLength: {
+                    value: 5,
+                    message: "At least five characters for the Title",
+                  },
+                })}
               ></textarea>
-              <input
-                type="text"
-                placeholder="Add up to 4 tags..."
-                className="h-10 placeholder:p-5 pb-3 placeholder:text-black/40 ml-5"
-              />
+              <div className="flex flex-row">
+                <input
+                  type="text"
+                  placeholder="Add up to 4 tags..."
+                  className="h-10 placeholder:p-5 pb-3 placeholder:text-black/40 ml-5"
+                  {...register("hashtagsFirst", {
+                    required: { value: true, message: "Hashtag required" },
+                  })}
+                />
+                <input
+                  type="text"
+                  className="h-10 placeholder:p-5 pb-3 ml-5"
+                  {...register("hashtagsSecond", {
+                    required: { value: true, message: "Hashtag required" },
+                  })}
+                />
+                <input
+                  type="text"
+                  className="h-10 placeholder:p-5 pb-3 ml-5"
+                  {...register("hashtagsThird", {
+                    required: { value: true, message: "Hashtag required" },
+                  })}
+                />
+                <input
+                  type="text"
+                  className="h-10 placeholder:p-5 pb-3 ml-5"
+                  {...register("hashtagsFourth", {
+                    required: { value: true, message: "Hashtag required" },
+                  })}
+                />
+              </div>
+
               <div className="flex flex-row gap-2 bg-[rgb(245,245,245)] w-full h-10">
                 <button className="ml-3 w-10 h-10 hover:bg-indigo-300/30 hover:text-indigo-600 rounded-md">
                   <Bold></Bold>
@@ -86,9 +178,19 @@ export default function CreatePost() {
                 </button>
               </div>
               <textarea
-                className="mt-7 w-full h-44 resize-none placeholder:text-black/60 placeholder:px-8 placeholder:py-3 placeholder:font-mono placeholder:text-md"
                 id="FormControlTextarea1"
                 placeholder="Write your post content here..."
+                className={clsx(
+                  "mt-7 w-full h-44 resize-none placeholder:text-black/60 placeholder:px-8 placeholder:py-3 placeholder:font-mono placeholder:text-md",
+                  { "border-red-500": errors.postBody }
+                )}
+                {...register("postBody", {
+                  required: { value: true, message: "Content post required" },
+                  minLength: {
+                    value: 10,
+                    message: "At least five characters for the Post",
+                  },
+                })}
               ></textarea>
             </form>
           </section>
