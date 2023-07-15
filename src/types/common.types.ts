@@ -1,5 +1,9 @@
+/* export interface Props {
+  post: Post;
+} */
+
 export interface Post {
-  id?: string;
+  _id: string;
   postTitle: string;
   postBody: string;
   postImg: string;
@@ -28,6 +32,34 @@ export interface CreatePostData {
   postOwner: string;
   hashtagsFirst: string;
   hashtagsSecond: string;
-  hashtagThird: string;
-  hashtagFourth: string;
+  hashtagsThird: string;
+  hashtagsFourth: string;
+}
+export interface User {
+  name: {
+    first: string;
+    last: string;
+  };
+  _id: string;
+  location: string;
+  picture: string;
+  joined: number;
+  work: string;
+  description: string;
+  login?: LoginData;
+}
+
+export interface UserState {
+  success: boolean;
+  data?: User;
+}
+
+export interface PostState {
+  success: boolean;
+  data?: Post[];
+}
+
+export interface LoginData {
+  email: string;
+  password: string;
 }

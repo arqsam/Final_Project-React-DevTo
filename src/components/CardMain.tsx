@@ -1,19 +1,29 @@
+import { useState, useEffect } from "react";
 import { BookmarkEmpty, Message } from "iconoir-react";
+import { Post, UserState } from "../types/common.types";
+import { Link } from "react-router-dom";
 
 interface Props {
-  userName: string;
-  title: string;
-  hashtag: string;
+  post: Post;
 }
 
 export default function CardMain(props: Props) {
-  const photo = `https://api.dicebear.com/6.x/notionists/svg?seed= ${props.userName}`;
+  const [postOwner, setPostOwner] = useState<UserState>();
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/users/${props.post.postOwner}`)
+      .then((response) => response.json())
+      .then((response: UserState) => setPostOwner(response))
+      .catch((error) => alert(error));
+  });
+
   return (
-    <article className="flex flex-col columns-1 border rounded-xl bg-white shadow-sm mb-2">
+    <article className="flex flex-col columns-1 border rounded-xl  shadow-sm mb-2">
+      <img className="rounded-t-xl" src={props.post.postImg} alt="Img-post" />
       <div>
         <div className="flex flex-row row-span-2 m-3 gap-2 align-middle">
           <img
-            src={photo}
+            src={postOwner?.data?.picture}
             alt="avatar"
             className=" rounded-full mt-z w-10 h-10 hover:outline hover:outline-indigo-200/50 border border-black"
           />
@@ -22,27 +32,30 @@ export default function CardMain(props: Props) {
               href=""
               className="text-[16px] font-semibold hover:text-indigo-900 hover:bg-gray-300/30 rounded-md w-20 whitespace-nowrap"
             >
-              {props.userName}
+              {postOwner?.data?.name.first}
+              {postOwner?.data?.name.last}
             </a>
-            <p className="text-[12px] ">Jul 7 (8 hours ago)</p>
+            <p className="text-[12px] ">{props.post.postDate}</p>
           </button>
         </div>
         <div className="pl-[4rem]">
-          <h1 className="font-bold text-2xl text-gray-900/90 hover:text-indigo-800">
-            <a href="">{props.title}</a>
-          </h1>
+          <Link to={`/post/${props.post._id}`}>
+            <h1 className="font-bold text-2xl text-gray-900/90 hover:text-indigo-800">
+              {props.post.postTitle}
+            </h1>
+          </Link>
           <div className="flex flex-row rows-4 gap-3 mt-2">
             <a className="hover:bg-gray-300/30 hover:text-indigo-900 rounded-md p-1">
-              {props.hashtag}
+              {props.post.hashtags.first}
             </a>
             <a className="hover:bg-gray-300/30 hover:text-indigo-900 rounded-md p-1">
-              {props.hashtag}
+              {props.post.hashtags.second}
             </a>
             <a className="hover:bg-gray-300/30 hover:text-indigo-900 rounded-md p-1">
-              {props.hashtag}
+              {props.post.hashtags.third}
             </a>
             <a className="hover:bg-gray-300/30 hover:text-indigo-900 rounded-md p-1">
-              {props.hashtag}
+              {props.post.hashtags.fourth}
             </a>
           </div>
           <div className="flex flex-row rows-4 gap-3 mt-2 justify-between mb-4">
@@ -55,7 +68,8 @@ export default function CardMain(props: Props) {
               </div>
               <p className="mx-2 text-[14px] pt-2 hover:text-indigo-900 whitespace-nowrap">
                 {" "}
-                5 Reactions{" "}
+                5 Reactions
+                {props.post.likes}
               </p>
             </button>
             <button className="flex flex-row  hover:bg-gray-300/30 rounded-md p-1">
@@ -71,6 +85,7 @@ export default function CardMain(props: Props) {
               </p>
               <button>
                 <BookmarkEmpty className="w-[19px] h-[19px] stroke-[2px] mt-2 hover:bg-gray-300/30 rounded-md" />
+                {props.post.bookmarks}
               </button>
             </div>
           </div>

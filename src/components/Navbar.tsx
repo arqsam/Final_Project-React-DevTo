@@ -1,6 +1,7 @@
 import Online from "./Online";
 import Offline from "./Offline";
 import { Search } from "iconoir-react";
+import { NavLink } from "react-router-dom";
 
 const Icon = () => {
   return <Search className="w-[20px] pb-2" />;
@@ -21,11 +22,13 @@ export default function Navbar(props: Props) {
             <div className="w-5 h-0.5 bg-gray-600"></div>
             <div className="w-5 h-0.5 bg-gray-600"></div>
           </a>
-          <img
-            className="h-10"
-            src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png"
-            alt="devlogo"
-          />
+          <NavLink to={"/"}>
+            <img
+              className="h-10"
+              src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png"
+              alt="devlogo"
+            />
+          </NavLink>
           <form
             action="Search"
             className="h-9 justify-between align-middle hidden grow md:rounded-md md:flex md:outline md:outline-1 outline-gray-500/50 hover:outline-2 hover:outline-indigo-600"

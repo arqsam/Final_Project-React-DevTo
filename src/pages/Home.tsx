@@ -1,11 +1,43 @@
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Menu from "../components/menu/Menu";
 import CardMain from "../components/CardMain";
 import CardAside from "../components/CardAside";
 import Footer from "../components/Footer";
 import { BookmarkEmpty, Message } from "iconoir-react";
+import { PostState } from "../types/common.types";
+import clsx from "clsx";
 
-export default function Home() {
+interface Props {
+  query?: string;
+}
+
+export default function Home(props: Props) {
+  const [posts, setPosts] = useState<PostState>();
+  const [isRelevant, setRelevant] = useState(true);
+  const [isLatest, setLatest] = useState(false);
+  const [isTop, setTop] = useState(false);
+  const [query, setQuery] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/posts/")
+      .then((response) => response.json())
+      .then((response: PostState) => setPosts(response));
+      .catch((error) => alert(error));
+  }, []);
+
+  useEffect(() => {
+    if (props.query !== undefined) {
+      if (props.query !== "") {
+        console.log("props query", props.query);
+        setQuery(true);
+        setRelevant(false);
+        setLatest(false);
+        setTop(false);
+      }
+    }
+  }, [props.query]);
+
   return (
     <>
       <header className=" bg-white shadow-md">
@@ -13,61 +45,132 @@ export default function Home() {
       </header>
 
       <div className="container mx-auto ">
-        <div className="grid grid-cols-12 grid-rows-3 gap-4 m-3 bg-[rgb(245,245,245,1)]">
+        <div className="grid grid-cols-12 grid-rows-3 gap-4 m-3 ">
           <aside className="hidden md:flex md:col-span-3 md:row-span-3  pt-4">
             <Menu></Menu>
           </aside>
           <main className="col-span-12 row-span-3 md:col-span-6 md:col-start-4 md:row-span-3 ">
             <ul className=" mt-1 pb-2 flex flex-rows-3 gap-5 text-[18px]">
               <li className="my-1">
-                <a
-                  className=" p-2 mr-2 hover:text-indigo-700 hover:bg-white rounded-md"
-                  aria-current="page"
-                  href="#"
-                  id="relevant-filter"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setRelevant(true);
+                    setLatest(false);
+                    setTop(false);
+                    setQuery(false);
+                  }}
+                  className={clsx(
+                    "p-2 mr-2 hover:text-indigo-700 hover:bg-white rounded-md",
+                    {
+                      "font-bold": isRelevant,
+                    }
+                  )}
                 >
                   {" "}
                   Relevant
-                </a>
+                </button>
               </li>
               <li className="my-1">
-                <a
-                  className="p-2 mr-2 hover:text-indigo-700 hover:bg-white rounded-md"
-                  href="#"
-                  id="latest-filter"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setRelevant(false);
+                    setLatest(true);
+                    setTop(false);
+                    setQuery(false);
+                  }}
+                  className={clsx(
+                    "p-2 mr-2 hover:text-indigo-700 hover:bg-white rounded-md",
+                    {
+                      "font-bold": isLatest,
+                    }
+                  )}
                 >
+                  {" "}
                   Latest
-                </a>
+                </button>
               </li>
               <li className="m-1">
-                <a
-                  className="p-2 mr-2 hover:text-indigo-700 hover:bg-white rounded-md"
-                  href="#"
-                  id="top-filter"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setRelevant(false);
+                    setLatest(false);
+                    setTop(true);
+                    setQuery(false);
+                  }}
+                  className={clsx(
+                    "p-2 mr-2 hover:text-indigo-700 hover:bg-white rounded-md",
+                    {
+                      "font-bold": isTop,
+                    }
+                  )}
                 >
+                  {" "}
                   Top
-                </a>
+                </button>
               </li>
             </ul>
-            <article className="flex flex-col columns-1 border rounded-xl bg-white shadow-sm mb-2">
-              <img
-                src="https://res.cloudinary.com/practicaldev/image/fetch/s--HsQMAsNu--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rk8vycfryt31mh9tkzoe.png"
-                alt="post-image"
-                className="rounded-t-xl"
-              />
-              <div>
-                <div className="flex flex-row row-span-2 m-3 gap-2 align-middle">
-                  <img
+            <article className="flex flex-col columns-1 border rounded-xl bg-white shadow-sm ">
+              <div className="flex flex-col gap-2 align-middle">
+                {posts?.data &&
+                  query &&
+                  posts.data
+                    .filter(
+                      (post) =>
+                        post.postTitle
+                          .toLowerCase()
+                          .includes(
+                            props.query?.toLowerCase() ?? "No Results"
+                          ) ||
+                        post.postBody
+                          .toLowerCase()
+                          .includes(props.query?.toLowerCase() ?? "No Results")
+                    )
+                    .map((post) => {
+                      console.log("post Searched", post);
+                      return <CardMain post={post} />;
+                    })}
+
+                {posts?.data &&
+                  isLatest &&
+                  [...posts.data]
+                    .sort((a, b) => Number(b.postDate) - Number(a.postDate))
+                    .map((post) => {
+                      return <CardMain post={post} />;
+                    })}
+
+                {posts?.data &&
+                  isTop &&
+                  posts.data
+                    .filter((post) => post.isRelevant)
+                    .map((post) => {
+                      return <CardMain post={post} />;
+                    })}
+                {posts?.data &&
+                  isRelevant &&
+                  posts.data.map((post) => {
+                    return <CardMain post={post} />;
+                  })}
+
+                {/* <img
+                      src="https://res.cloudinary.com/practicaldev/image/fetch/s--HsQMAsNu--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rk8vycfryt31mh9tkzoe.png"
+                      alt="post-image"
+                      className="rounded-t-xl"
+                    />
+                    <div> */}
+                {/*  <img
                     src="https://api.dicebear.com/6.x/notionists/svg"
                     alt="avatar"
                     className=" rounded-full mt-z w-10 h-10 hover:outline hover:outline-indigo-200/50 border border-black"
-                  />
-                  <button className="flex flex-col col-span-2">
+                    />
+                    <button className="flex flex-col col-span-2">
                     <a
-                      href=""
-                      className="text-[16px] font-semibold hover:text-indigo-900 hover:bg-gray-300/30 rounded-md w-20"
+                    href=""
+                    className="text-[16px] font-semibold hover:text-indigo-900 hover:bg-gray-300/30 rounded-md w-20"
                     >
-                      Abhishek
+                    Abhishek
                     </a>
                     <p className="text-[12px] mx-1">Jul 7 (8 hours ago)</p>
                   </button>
@@ -130,20 +233,13 @@ export default function Home() {
                       </button>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </article>
             <section>
-              <CardMain
-                userName="Any Person"
-                title="Best way to prepare for coding interviews in 2023?"
-                hashtag="#react"
-              ></CardMain>
-              <CardMain
-                userName="Other Person"
-                title="Learn React.js: A Complete Guide to Proposals, Components, Functional Components, State, React.js Hooks, and Redux"
-                hashtag="#react"
-              ></CardMain>
+              {/*  {posts.map((post) => {
+                return <CardMain></CardMain>;
+              })} */}
             </section>
           </main>
           <aside className="hidden  md:flex md:col-span-3 md:col-start-10 md:row-span-3 gap-4 flex-wrap">
