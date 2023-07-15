@@ -5,7 +5,7 @@ interface Props {
 
 export default function CardAside(props: Props) {
   return (
-    <article className="h-auto flex flex-col pb-4  bg-white py-4 border-b-[1.5px] border-gray-600/20">
+    <article className="h-auto flex flex-col pb-4 py-4 border-t-[1.5px] border-gray-600/20">
       <a href="" className="">
         <h2 className="font-normal text-base px-3 text-gray-800/90  hover:text-indigo-700 ">
           {props.content}

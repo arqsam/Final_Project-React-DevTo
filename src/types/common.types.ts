@@ -25,15 +25,18 @@ export interface CreatePostData {
   postTitle: string;
   postBody: string;
   postImg: string;
-  postDate: number;
-  isRelevant: boolean;
-  likes: number;
-  bookmarks: number;
-  postOwner: string;
-  hashtagsFirst: string;
-  hashtagsSecond: string;
-  hashtagsThird: string;
-  hashtagsFourth: string;
+  hashtags: {
+    first: string;
+    second: string;
+    third: string;
+    fourth: string;
+  };
+}
+
+export interface postSuccess {
+  success: boolean;
+  message?: string;
+  data?: Post;
 }
 export interface User {
   name: {

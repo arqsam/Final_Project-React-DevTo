@@ -31,18 +31,18 @@ export default function Login() {
       .then((response) => {
         console.log("response:", response);
         if (response?.data) {
-          localStorage.setItem("token:", response?.data);
+          localStorage.setItem("token", response?.data);
           //para sacar el token y utilizarlo en otro lugar
           /* const token = localStorage.getItem("token"); */
           //para cerrar sesion (borrar el token)
           /* localStorage.removeItem("token"); */
           navigate("/");
         } else {
-          toast.error("Nope");
+          toast.error("Incorrect Data");
         }
       })
       .catch(() => {
-        toast.error("Fallo el fetch :S");
+        toast.error("Fail Fetch");
       });
   }
 
@@ -52,26 +52,44 @@ export default function Login() {
       <header className=" bg-white shadow-md">
         <Navbar isOnline={false} />
       </header>
-      <div className="container mx-auto">
-        <nav className="flex flex-col col-span-1 border gap-2 bg-white rounded-xl shadow-md mx-80 my-10 p-6 justify-center">
-          <h1 className="flex justify-center font-bold text-3xl font-sans">
+      <div className="container mx-auto flex justify-center p-2">
+        <nav className="flex flex-col w-[65%] col-span-1 border gap-2 bg-white rounded-xl shadow-md mx-80 my-10 p-6 justify-center">
+          <h1 className="flex justify-center pt-1 font-bold text-3xl font-sans mt-2">
             Welcome to DEV Community
           </h1>
-          <p className="flex justify-center mb-4">
+          <p className="flex justify-center mb-8">
             DEV Community is a community of 1,098,042 amazing developers
           </p>
-          <button className="w-full h-12 rounded-lg bg-black hover:bg-black/80 font-sans text-white font-bold">
-            Continue with Apple{" "}
+          <button className="flex flex-row pt-3 justify-center gap-1 w-full h-12 rounded-lg bg-black hover:bg-black/80 font-sans text-white font-bold">
+            <img
+              src="public/apple-logo-svgrepo-com.svg"
+              alt="apple"
+              className="w-5"
+            />
+            Continue with Apple
           </button>
-          <button className="w-full h-12 rounded-lg bg-[rgb(5,49,59)] hover:bg-[rgba(5,49,59,0.80)] font-sans text-white font-bold">
-            {" "}
+          <button className="flex flex-row pt-3 justify-center gap-1 w-full h-12 rounded-lg bg-[rgb(5,49,59)] hover:bg-[rgba(5,49,59,0.80)] font-sans text-white font-bold">
+            <img
+              src="public/emoji-funny-square-svgrepo-com.svg"
+              alt="forem"
+              className="w-5"
+            />{" "}
             Continue with Forem{" "}
           </button>
-          <button className="w-full h-12 rounded-lg bg-[rgb(36,41,46)] hover:bg-black font-sans text-white font-bold">
+          <button className="flex flex-row pt-3 justify-center gap-1 w-full h-12 rounded-lg bg-[rgb(36,41,46)] hover:bg-black font-sans text-white font-bold">
+            <img
+              src="public/github-142-svgrepo-com.svg"
+              alt="github"
+              className="w-5"
+            />{" "}
             Continue with GitHub
           </button>
-          <button className="w-full h-12 rounded-lg bg-[rgb(29,161,242)] hover:bg-[rgb(25,137,207)] font-sans text-white font-bold">
-            {" "}
+          <button className="flex flex-row pt-3 justify-center gap-1 w-full h-12 rounded-lg bg-[rgb(29,161,242)] hover:bg-[rgb(25,137,207)] font-sans text-white font-bold">
+            <img
+              src="public/twitter-154-svgrepo-com.svg"
+              alt="twitter"
+              className="w-5"
+            />{" "}
             Continue with Twitter{" "}
           </button>
           <div>

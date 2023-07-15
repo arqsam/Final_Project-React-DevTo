@@ -22,8 +22,8 @@ export default function Home(props: Props) {
   useEffect(() => {
     fetch("http://localhost:8080/posts/")
       .then((response) => response.json())
-      .then((response: PostState) => setPosts(response));
-      .catch((error) => alert(error));
+      .then((response: PostState) => setPosts(response))
+      .catch((error) => alert("ERROR EN HOME"));
   }, []);
 
   useEffect(() => {
@@ -112,7 +112,7 @@ export default function Home(props: Props) {
                 </button>
               </li>
             </ul>
-            <article className="flex flex-col columns-1 border rounded-xl bg-white shadow-sm ">
+            <article className="flex flex-col columns-1 rounded-xl shadow-sm ">
               <div className="flex flex-col gap-2 align-middle">
                 {posts?.data &&
                   query &&
@@ -153,99 +153,13 @@ export default function Home(props: Props) {
                   posts.data.map((post) => {
                     return <CardMain post={post} />;
                   })}
-
-                {/* <img
-                      src="https://res.cloudinary.com/practicaldev/image/fetch/s--HsQMAsNu--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rk8vycfryt31mh9tkzoe.png"
-                      alt="post-image"
-                      className="rounded-t-xl"
-                    />
-                    <div> */}
-                {/*  <img
-                    src="https://api.dicebear.com/6.x/notionists/svg"
-                    alt="avatar"
-                    className=" rounded-full mt-z w-10 h-10 hover:outline hover:outline-indigo-200/50 border border-black"
-                    />
-                    <button className="flex flex-col col-span-2">
-                    <a
-                    href=""
-                    className="text-[16px] font-semibold hover:text-indigo-900 hover:bg-gray-300/30 rounded-md w-20"
-                    >
-                    Abhishek
-                    </a>
-                    <p className="text-[12px] mx-1">Jul 7 (8 hours ago)</p>
-                  </button>
-                </div>
-                <div className="pl-[4rem]">
-                  <h1 className="font-bold text-2xl text-gray-900/90  hover:text-indigo-800">
-                    <a href="">
-                      Integrating Jest Testing into an Existing Vue 3 Project
-                      with ViteJs
-                    </a>
-                  </h1>
-                  <div className="flex flex-row rows-4 gap-3 mt-2">
-                    <a className="hover:bg-gray-300/30 hover:text-indigo-900 rounded-md p-1">
-                      #devTo
-                    </a>
-                    <a className="hover:bg-gray-300/30 hover:text-indigo-900 rounded-md p-1">
-                      #javascript
-                    </a>
-                    <a className="hover:bg-gray-300/30 hover:text-indigo-900 rounded-md p-1">
-                      #vue
-                    </a>
-                    <a className="hover:bg-gray-300/30 hover:text-indigo-900 rounded-md p-1">
-                      #viteJs
-                    </a>
-                  </div>
-                  <div className="flex flex-row rows-4 gap-3 mt-2 justify-between mb-4">
-                    <button className="flex flex-row gap-20 hover:bg-gray-300/30 rounded-md p-1">
-                      <div className="flex flex-row w-1 p-1">
-                        <p className="w-7 bg-slate-400/20 rounded-full z-30">
-                          💖
-                        </p>
-                        <p className="w-7 bg-slate-400/20 rounded-full z-20">
-                          🦄
-                        </p>
-                        <p className="w-7 bg-slate-400/20 rounded-full z-10">
-                          🔥
-                        </p>
-                        <p className="w-7 bg-slate-400/20 rounded-full z-0">
-                          🤯
-                        </p>
-                      </div>
-                      <p className="mx-2 text-[14px] pt-2 hover:text-indigo-900 whitespace-nowrap">
-                        {" "}
-                        5 Reactions{" "}
-                      </p>
-                    </button>
-                    <button className="flex flex-row  hover:bg-gray-300/30 rounded-md p-1">
-                      <Message className="w-[19px] h-[19px] stroke-[2px] mt-2" />
-                      <p className="mx-2 text-[14px] pt-2 hover:text-indigo-900 whitespace-nowrap">
-                        {" "}
-                        Add comment{" "}
-                      </p>
-                    </button>
-                    <div className="flex flex-row pr-4">
-                      <p className="text-[12px] mx-1 align-middle mt-[14px] whitespace-nowrap">
-                        4 min read
-                      </p>
-                      <button>
-                        <BookmarkEmpty className="w-[19px] h-[19px] stroke-[2px] mt-2 hover:bg-gray-300/30 rounded-md" />
-                      </button>
-                    </div>
-                  </div>
-                </div> */}
               </div>
             </article>
-            <section>
-              {/*  {posts.map((post) => {
-                return <CardMain></CardMain>;
-              })} */}
-            </section>
           </main>
-          <aside className="hidden  md:flex md:col-span-3 md:col-start-10 md:row-span-3 gap-4 flex-wrap">
+          <aside className="hidden h-48  md:flex md:col-span-3 md:col-start-10 md:row-span-3 gap-4 flex-wrap">
             <section className="w-screen h-[40rem] flex flex-col bg-white rounded-xl pt-1 border shadow-md">
-              <div className="flex flex-row justify-between py-4 border-b-[1.5px] border-gray-600/20 align-middle">
-                <h1 className="font-bold text-xl px-2">Listings</h1>
+              <div className="flex flex-row justify-between py-4 border-gray-600/20 align-middle">
+                <h1 className="font-bold text-xl px-3">Listings</h1>
                 <a
                   href=""
                   className="px-2 mt-1 text-[14px] text-indigo-700 hover:text-indigo-900 hover:underline font-semibold"
@@ -278,15 +192,15 @@ export default function Home(props: Props) {
               <div className="flex flex-col justify-center py-4 align-middle">
                 <a
                   href=""
-                  className="px-2 mt-1 text-[14px] hover:text-indigo-900 font-semibold flex flex-row justify-center"
+                  className="px-2 pt-6 text-[14px] hover:text-indigo-900 font-semibold flex flex-row justify-center border-t-[1.5px]"
                 >
                   Create a Listing
                 </a>
               </div>
             </section>
             <section className="w-screen h-auto flex flex-col bg-white rounded-xl pt-1 border shadow-md">
-              <div className="flex flex-row justify-between py-4 border-b-[1.5px] border-gray-600/20 align-middle">
-                <h1 className="font-bold text-xl px-2">#discuss</h1>
+              <div className="flex flex-row justify-between py-4  border-gray-600/20 align-middle">
+                <h1 className="font-bold text-xl px-3">#discuss</h1>
               </div>
               <div>
                 <CardAside

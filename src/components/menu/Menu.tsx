@@ -62,30 +62,30 @@ export default function Menu() {
           <ListElement icon="👀" title="Terms of use" />
         </li>
       </ul>
-      <div className="mx-3 ml-5 grid grid-rows-1 grid-cols-6 gap-2 mt-2">
+      <div className="mx-3 ml-5 grid grid-rows-1 grid-cols-6 gap-2 my-4">
         <a href="" className="hover:bg-indigo-600/10 w-9 h-9 p-1 rounded-md ">
-          <Twitter className="w-[26px] h-[26px] stroke-[2px] hover:text-indigo-800" />
-        </a>
-        <a href="" className="hover:bg-indigo-600/10 w-9 h-9 p-1 rounded-md ">
-          <FacebookTag className="w-[26px] h-[26px] stroke-[2px]  hover:text-indigo-800" />
-        </a>
-        <a href="" className="hover:bg-indigo-600/10 w-9 h-9 p-1 rounded-md">
-          <GithubCircle className="w-[26px] h-[26px] stroke-[2px]  hover:text-indigo-800" />
-        </a>
-        <a href="" className="hover:bg-indigo-600/10 w-9 h-9 p-1 rounded-md">
-          <Instagram className="w-[26px] h-[26px] stroke-[2px]  hover:text-indigo-800" />
-        </a>
-        <a href="" className="hover:bg-indigo-600/10 w-9 h-9 p-1 rounded-md">
-          <Stackoverflow className="w-[26px] h-[26px] stroke-[2px]  hover:text-indigo-800" />
+          <img src="public/icons8-twitter.svg" alt="twitter"></img>
         </a>
         <a href="" className="hover:bg-indigo-600/10 w-9 h-9 p-1 rounded-md ">
-          <YouTube className="w-[26px] h-[26px] stroke-[2px]  hover:text-indigo-800" />
+          <img src="public/icons8-facebook.svg" alt="facebook"></img>
+        </a>
+        <a href="" className="hover:bg-indigo-600/10 w-9 h-9 p-1 rounded-md">
+          <img src="public/icons8-github.svg" alt="github"></img>
+        </a>
+        <a href="" className="hover:bg-indigo-600/10 w-9 h-9 p-1 rounded-md">
+          <img src="public/icons8-instagram.svg" alt="instagram"></img>
+        </a>
+        <a href="" className="hover:bg-indigo-600/10 w-9 h-9 p-1 rounded-md">
+          <img src="public/icons8-twitch.svg" alt="twitch"></img>
+        </a>
+        <a href="" className="hover:bg-indigo-600/10 w-9 h-9 p-1 rounded-md ">
+          <img src="public/icons8-mastodon.svg" alt="mastodon"></img>
         </a>
       </div>
       <nav>
-        <header className="ml-5 m-4 font-bold flex flex-row justify-between">
+        <header className="ml-5 my-6 font-bold flex flex-row justify-between">
           <p>My Tags</p>
-          <Svg3DSelectPoint className="w-[26px] h-[26px] stroke-[2px]  hover:text-indigo-800" />
+          <Svg3DSelectPoint className="w-[26px] h-[28px] stroke-[2px]  hover:text-indigo-800" />
         </header>
         <div className="h-[9rem] overflow-y-auto flex flex-col gap-2">
           <Hashtags text="#devTo" />
@@ -97,7 +97,7 @@ export default function Menu() {
           <Hashtags text="#kodemia" />
         </div>
       </nav>
-      <article className="h-[16rem] overflow-y-auto flex flex-col mt-4 border bg-white rounded-xl shadow-md">
+      <article className="h-[20rem] overflow-y-auto flex flex-col mt-8 border bg-white rounded-xl shadow-md">
         <div className="grid grid-cols-2 p-2 gap-4">
           <p className="whitespace-nowrap"> DEV Community </p>
           <button className="justify-between hover:bg-slate-600/20 font-bold mx-9 rounded-md">

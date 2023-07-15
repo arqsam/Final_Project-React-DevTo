@@ -1,12 +1,12 @@
-import { Droplet, Heart } from "iconoir-react";
+import { Heart } from "iconoir-react";
 
 export default function Footer() {
   return (
-    <article className="flex flex-col col-span-1 justify-center p-5 flex-wrap">
+    <article className="flex flex-col col-span-1  justify-center p-5 flex-wrap ">
       <p className="text-center text-[14px] text-black/80">
         <a
           href=""
-          className="font-semibold text-indigo-700 hover:text-indigo-900 hover:underline "
+          className=" font-semibold text-indigo-700 hover:text-indigo-900 hover:underline "
         >
           {" "}
           DEV Community{" "}
@@ -116,8 +116,8 @@ export default function Footer() {
         . DEV Community © 2016 - 2023.
       </p>
       <p className="flex flex-row justify-center mt-3 text-center text-[12px] text-black/50">
-        Made with <Heart className="w-[15px] mx-2" /> and a lot of{" "}
-        <Droplet className="w-[15px] mx-2" /> Sam. Kodemia Community © 2023.
+        Made with <Heart className="w-[15px] mx-2" /> of Sam. Kodemia Community
+        © 2023.
       </p>
     </article>
   );
