@@ -4,7 +4,6 @@ import Menu from "../components/menu/Menu";
 import CardMain from "../components/CardMain";
 import CardAside from "../components/CardAside";
 import Footer from "../components/Footer";
-import { BookmarkEmpty, Message } from "iconoir-react";
 import { PostState } from "../types/common.types";
 import clsx from "clsx";
 

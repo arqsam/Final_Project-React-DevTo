@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { CreatePostData, postSuccess } from "../types/common.types";
 import clsx from "clsx";
@@ -14,6 +14,7 @@ import {
   Quote,
   Text,
   Svg3DSelectPoint,
+  Cancel,
 } from "iconoir-react";
 import {
   Popover,
@@ -23,11 +24,10 @@ import {
   Button,
   Input,
 } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function CreatePost() {
   const nav = useNavigate();
-  const [posts, setPosts] = useState<CreatePostData[]>([]);
   const [titleFocused, setTitleFocused] = useState(false);
   const [tagsFocused, setTagsFocused] = useState(false);
   const [bodyFocused, setBodyFocused] = useState(false);
@@ -61,22 +61,20 @@ export default function CreatePost() {
     }
   }
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreatePostData>();
+  const { register, handleSubmit } = useForm<CreatePostData>();
 
   return (
     <>
-      <header className="container grid grid-cols-12 h-auto mx-auto  w-screen mt-5">
-        <div className="flex items-center w-full justify-between col-span-12 ">
-          <img
-            className="h-12"
-            src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png"
-            alt="devlogo"
-          />
-          <img />
+      <nav className="container grid grid-cols-12 h-auto mx-auto  w-screen mt-5">
+        <div className="flex items-center w-full justify-between col-span-12">
+          <NavLink to={"/"}>
+            <img
+              className="h-12"
+              src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png"
+              alt="devlogo"
+            />
+            <img />
+          </NavLink>
           <p className="mx-5 w-40 font-semibold"> Create Post </p>
           <div className="flex flex-row row-span-3 w-2/3 gap-6 mx-40">
             <button className="w-auto h-10 px-5 hover:bg-indigo-300/30 hover:text-indigo-600 rounded-md font-semibold">
@@ -86,14 +84,21 @@ export default function CreatePost() {
               Preview
             </button>
           </div>
-          <button className="font-semibold"> X</button>
+          <NavLink to={"/"}>
+            <button className="font-semibold">
+              <Cancel></Cancel>
+            </button>
+          </NavLink>
         </div>
-      </header>
-      <main className="container flex flex-col col-span-1 mx-auto h-auto w-screen mt-4">
-        <div className="flex flex-row row-span-6 gap-10 mx-6">
+      </nav>
+      <main className="container flex flex-col col-span-1 mx-auto h-auto md:w-full mt-4">
+        <div className="flex flex-row row-span-6 gap-12 mx-6">
           <section>
-            <form action="" onSubmit={handleSubmit(onSubmit)}>
-              <section className="w-full bg-white py-6 rounded-2xl shadow-md">
+            <form
+              action=""
+              onSubmit={(event) => void handleSubmit(onSubmit)(event)}
+            >
+              <section className="md:w-full bg-white py-6 rounded-2xl shadow-md">
                 <div>
                   <Popover placement="bottom">
                     <PopoverHandler>
@@ -117,9 +122,7 @@ export default function CreatePost() {
                         <Input
                           color="gray"
                           label="Image URL"
-                          className={clsx("border-gray-800", {
-                            "border-red-500": errors.postImg,
-                          })}
+                          className="border-gray-800"
                           {...register("postImg", {
                             required: {
                               value: true,
@@ -127,7 +130,7 @@ export default function CreatePost() {
                             },
                           })}
                         />
-                        <Button color="gray" variant="gradient">
+                        <Button type="submit" color="gray" variant="gradient">
                           Add
                         </Button>
                       </div>
@@ -135,48 +138,71 @@ export default function CreatePost() {
                   </Popover>
                 </div>
                 <textarea
-                  id="FormControlTextarea1"
                   placeholder="New post title here..."
-                  className={clsx(
-                    "outline-none border-none mt-7 w-full p-5 h-36 resize-none text-black/60 font-extrabold text-5xl placeholder:text-black/60  placeholder:py-10 placeholder:font-extrabold placeholder:text-5xl",
-                    { "border-red-500": errors.postTitle }
-                  )}
+                  onFocus={() => setTitleFocused(true)}
+                  className="outline-none border-none mt-7 w-full p-5 h-36 resize-none text-black/60 font-extrabold text-5xl placeholder:text-black/60  placeholder:py-10 placeholder:font-extrabold placeholder:text-5xl"
                   {...register("postTitle", {
                     required: { value: true, message: "Title required" },
                     minLength: {
                       value: 5,
                       message: "At least five characters for the Title",
                     },
+                    onBlur: () => setTitleFocused(false),
                   })}
                 ></textarea>
-                <div className="flex flex-row w-auto">
+                <div className="flex flex-row w-auto p-3">
+                  {
+                    <input
+                      placeholder="Add up to first tag..."
+                      onFocus={() => setTitleFocused(true)}
+                      className="text-center outline-none border-none h-10 placeholder:text-black/40 "
+                      {...register("hashtags.first", {
+                        required: { value: true, message: "Hashtag required" },
+                        minLength: {
+                          value: 3,
+                          message: "Min Length Required is 3",
+                        },
+                        onBlur: () => setTagsFocused(false),
+                      })}
+                    />
+                  }
                   <input
-                    type="text"
-                    placeholder="Add up to 4 tags..."
-                    className="outline-none border-none h-10 placeholder:p-5 pb-3 placeholder:text-black/40 ml-5"
-                    {...register("hashtags.first", {
-                      required: { value: true, message: "Hashtag required" },
-                    })}
-                  />
-                  <input
-                    type="text"
-                    className="outline-none border-none h-10 placeholder:p-5 pb-3 ml-5"
+                    placeholder="Add up to second tag..."
+                    onFocus={() => setTitleFocused(true)}
+                    className="text-center outline-none border-none h-10 placeholder:text-black/40 "
                     {...register("hashtags.second", {
                       required: { value: true, message: "Hashtag required" },
+                      minLength: {
+                        value: 3,
+                        message: "Min Length Required is 3",
+                      },
+                      onBlur: () => setTagsFocused(false),
                     })}
                   />
                   <input
-                    type="text"
-                    className="outline-none border-none h-10 placeholder:p-5 pb-3 ml-5"
+                    placeholder="Add up to third tag..."
+                    onFocus={() => setTitleFocused(true)}
+                    className="text-center outline-none border-none h-10 placeholder:text-black/40 "
                     {...register("hashtags.third", {
                       required: { value: true, message: "Hashtag required" },
+                      minLength: {
+                        value: 3,
+                        message: "Min Length Required is 3",
+                      },
+                      onBlur: () => setTagsFocused(false),
                     })}
                   />
                   <input
-                    type="text"
-                    className="outline-none border-none h-10 placeholder:p-5 pb-3 ml-5"
+                    placeholder="Add up to fourth tag..."
+                    onFocus={() => setTitleFocused(true)}
+                    className="text-center outline-none border-none h-10 placeholder:text-black/40 "
                     {...register("hashtags.fourth", {
                       required: { value: true, message: "Hashtag required" },
+                      minLength: {
+                        value: 3,
+                        message: "Min Length Required is 3",
+                      },
+                      onBlur: () => setTagsFocused(false),
                     })}
                   />
                 </div>
@@ -213,12 +239,9 @@ export default function CreatePost() {
                   </button>
                 </div>
                 <textarea
-                  id="FormControlTextarea1"
                   placeholder="Write your post content here..."
-                  className={clsx(
-                    "outline-none border-none mt-7 w-full h-44 resize-none p-4 placeholder:text-black/60 placeholder:px-8 placeholder:py-3 placeholder:font-thin placeholder:text-md",
-                    { "border-red-500": errors.postBody }
-                  )}
+                  onFocus={() => setBodyFocused(true)}
+                  className="outline-none border-none mt-7 w-full h-44 resize-none p-4 placeholder:text-black/60 placeholder:px-8 placeholder:py-3 placeholder:font-thin placeholder:text-md"
                   {...register("postBody", {
                     required: {
                       value: true,
@@ -228,15 +251,17 @@ export default function CreatePost() {
                       value: 10,
                       message: "At least five characters for the Post",
                     },
+                    onBlur: () => setBodyFocused(false),
                   })}
                 ></textarea>
               </section>
 
               <div className="my-4 flex flex-row gap-4 mx-6">
-                <button className="bg-indigo-600 rounded-md py-2 px-4 text-white font-semibold hover:bg-indigo-800">
-                  {" "}
-                  Publish
-                </button>
+                <input
+                  type="submit"
+                  className="bg-indigo-600 rounded-md py-2 px-4 text-white font-semibold hover:bg-indigo-800"
+                  value="Publish"
+                ></input>
                 <button className="rounded-md py-2 px-4 text-black/80 font-semibold hover:bg-indigo-300/30 hover:text-indigo-800">
                   {" "}
                   Safe draft{" "}
@@ -250,42 +275,51 @@ export default function CreatePost() {
                 </button>
               </div>
             </form>
-            {errors.postTitle && <p>{errors?.postTitle.message}</p>}
-            {errors.hashtags.first && <p>{errors?.hashtags.first.message}</p>}
-            {errors.hashtags.second && <p>{errors?.hashtags.second.message}</p>}
-            {errors.hashtags.third && <p>{errors?.hashtags.third.message}</p>}
-            {errors.hashtags.fourth && <p>{errors?.hashtags.fourth.message}</p>}
-            {errors.postBody && <p>{errors?.postBody.message}</p>}
           </section>
           <article className="pr-12">
-            <h1 className="my-5 font-bold text-xl text-gray-900/80">
-              Writing a Great Post Title
-            </h1>
-            <p className="text-justify">
-              Think of your post title as a super short (but compelling!)
-              description — like an overview of the actual post in one short
-              sentence. Use keywords where appropriate to help ensure people can
-              find your post by search.
-            </p>
+            {titleFocused && (
+              <div className="absolute w-72 top-[5rem]">
+                <h1 className="my-5 font-bold text-xl text-gray-900/80">
+                  Writing a Great Post Title
+                </h1>
+                <p className="text-justify">
+                  Think of your post title as a super short (but compelling!)
+                  description — like an overview of the actual post in one short
+                  sentence. Use keywords where appropriate to help ensure people
+                  can find your post by search.
+                </p>
+              </div>
+            )}
+            {tagsFocused && (
+              <div className="absolute w-72 top-[5rem]">
+                <h1 className="my-5 font-bold text-xl text-gray-900/80">
+                  Tagging Guidelines
+                </h1>
+                <p className="text-justify">
+                  Tags help people find your post. Think of tags as the topics
+                  or categories that best describe your post. Add up to four
+                  comma-separated tags per post. Combine tags to reach the
+                  appropriate subcommunities. Use existing tags whenever
+                  possible. Some tags, such as “help” or “healthydebate”, have
+                  special posting guidelines.
+                </p>
+              </div>
+            )}
+            {bodyFocused && (
+              <div className="absolute w-72 top-[26rem]">
+                <h2 className="my-5 font-bold text-xl text-gray-900/80">
+                  Editor Basics
+                </h2>
+                <p className="text-justify">
+                  Use Markdown to write and format posts. Embed rich content
+                  such as Tweets, YouTube videos, etc. A list of supported
+                  embeds. In addition to images for the post's content, you can
+                  also drag and drop a cover image.
+                </p>
+              </div>
+            )}
           </article>
         </div>
-        {/*  <div className="my-4 flex flex-row gap-4 mx-6">
-          <button className="bg-indigo-600 rounded-md py-2 px-4 text-white font-semibold hover:bg-indigo-800">
-            {" "}
-            Publish
-          </button>
-          <button className="rounded-md py-2 px-4 text-black/80 font-semibold hover:bg-indigo-300/30 hover:text-indigo-800">
-            {" "}
-            Safe draft{" "}
-          </button>
-          <button className="rounded-md py-2 px-4 text-black/80 font-semibold hover:bg-indigo-300/30 hover:text-indigo-800">
-            <Svg3DSelectPoint></Svg3DSelectPoint>
-          </button>
-          <button className="rounded-md py-2 px-4 text-black/80 font-semibold hover:bg-indigo-300/30 hover:text-indigo-800">
-            {" "}
-            Revert new changes{" "}
-          </button>
-        </div> */}
       </main>
     </>
   );

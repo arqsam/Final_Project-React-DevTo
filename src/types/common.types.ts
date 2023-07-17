@@ -20,17 +20,19 @@ export interface Post {
   };
 }
 
+interface Hashtags {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+}
+
 export interface CreatePostData {
   id?: string;
   postTitle: string;
   postBody: string;
   postImg: string;
-  hashtags: {
-    first: string;
-    second: string;
-    third: string;
-    fourth: string;
-  };
+  hashtags: Hashtags;
 }
 
 export interface postSuccess {
