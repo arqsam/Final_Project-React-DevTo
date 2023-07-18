@@ -57,7 +57,7 @@ export default function Login() {
           </p>
           <button className="flex flex-row pt-3 justify-center gap-1 w-full h-12 rounded-lg bg-black hover:bg-black/80 font-sans text-white font-bold">
             <img
-              src="public/apple-logo-svgrepo-com.svg"
+              src="../apple-logo-svgrepo-com.svg"
               alt="apple"
               className="w-5"
             />
@@ -65,7 +65,7 @@ export default function Login() {
           </button>
           <button className="flex flex-row pt-3 justify-center gap-1 w-full h-12 rounded-lg bg-[rgb(5,49,59)] hover:bg-[rgba(5,49,59,0.80)] font-sans text-white font-bold">
             <img
-              src="public/emoji-funny-square-svgrepo-com.svg"
+              src="../emoji-funny-square-svgrepo-com.svg"
               alt="forem"
               className="w-5"
             />{" "}
@@ -73,7 +73,7 @@ export default function Login() {
           </button>
           <button className="flex flex-row pt-3 justify-center gap-1 w-full h-12 rounded-lg bg-[rgb(36,41,46)] hover:bg-black font-sans text-white font-bold">
             <img
-              src="public/github-142-svgrepo-com.svg"
+              src="../github-142-svgrepo-com.svg"
               alt="github"
               className="w-5"
             />{" "}
@@ -81,7 +81,7 @@ export default function Login() {
           </button>
           <button className="flex flex-row pt-3 justify-center gap-1 w-full h-12 rounded-lg bg-[rgb(29,161,242)] hover:bg-[rgb(25,137,207)] font-sans text-white font-bold">
             <img
-              src="public/twitter-154-svgrepo-com.svg"
+              src="../twitter-154-svgrepo-com.svg"
               alt="twitter"
               className="w-5"
             />{" "}
