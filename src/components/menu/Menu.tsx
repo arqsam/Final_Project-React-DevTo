@@ -1,15 +1,6 @@
 import ListElement from "./ListElement";
 import Hashtags from "./Hashtags";
-
-import {
-  GithubCircle,
-  Twitter,
-  FacebookTag,
-  Instagram,
-  Stackoverflow,
-  YouTube,
-  Svg3DSelectPoint,
-} from "iconoir-react";
+import { Svg3DSelectPoint } from "iconoir-react";
 
 export default function Menu() {
   return (

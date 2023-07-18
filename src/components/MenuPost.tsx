@@ -1,6 +1,12 @@
 import { BookmarkEmpty, Heart, Message, MoreHoriz } from "iconoir-react";
+import { Comment, Post } from "../types/common.types";
 
-export default function MenuPost() {
+interface Props {
+  post: Post;
+  comments: Comment[];
+}
+
+export default function MenuPost(props: Props) {
   return (
     <main className="md:col-span-1 md:row-span-3 flex flex-col col-span-1 w-screen gap-3 m-[4rem] fixed">
       <ul className="flex flex-col col-span-1 gap-8 ">
@@ -8,18 +14,21 @@ export default function MenuPost() {
           <button className="hover:text-red-600">
             {" "}
             <Heart></Heart>
+            {props.post?.likes}
           </button>
         </li>
         <li>
           <button className="hover:text-yellow-500">
             {" "}
             <Message></Message>
+            {props.comments?.length}
           </button>
         </li>
         <li>
           <button className="hover:text-sky-700">
             {" "}
             <BookmarkEmpty></BookmarkEmpty>
+            {props.post?.bookmarks}
           </button>
         </li>
         <li>

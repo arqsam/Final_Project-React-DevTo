@@ -1,18 +1,26 @@
 import { Heart, Message } from "iconoir-react";
+import { useState, useEffect } from "react";
+import { UserState, Comment } from "../types/common.types";
 
 interface Props {
-  userName: string;
-  text: string;
+  comment?: Comment;
 }
 
 export default function Comments(props: Props) {
-  const photo = `https://api.dicebear.com/6.x/notionists/svg?seed= ${props.userName}`;
+  const [user, setUser] = useState<UserState>();
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/users/${props.comment?.commenterID ?? 0}`)
+      .then((res) => res.json())
+      .then((res: UserState) => setUser(res))
+      .catch(() => alert("ERROR IN COMMENTS"));
+  }, [props.comment?.commenterID]);
 
   return (
     <article className="flex flex-col columns-1  bg-white  mb-2 rounded-md">
       <div className="flex flex-row row-span-2 m-3 gap-2 align-middle">
         <img
-          src={photo}
+          src={user?.data.picture}
           alt="avatar"
           className=" rounded-full mt-z w-10 h-10 hover:outline hover:outline-indigo-200/50 border border-black"
         />
@@ -22,11 +30,13 @@ export default function Comments(props: Props) {
               href=""
               className="text-[16px] font-semibold hover:text-indigo-900 hover:bg-gray-300/30 rounded-md whitespace-nowrap"
             >
-              {props.userName}
+              {`${user?.data?.name.first} ${user?.data?.name.last}`}
             </a>
-            <p className="mt-1 text-[12px] mx-2">• Jul 7 (8 hours ago)</p>
+            <p className="mt-1 text-[12px] mx-2">
+              • {props.comment?.commentDate ?? "1688927282"}
+            </p>
           </button>
-          <p className="mt-2">{props.text}</p>
+          <p className="mt-2">{props.comment?.content}</p>
           <div className="flex flex-row gap-4 mt-3">
             <button className="flex flex-row  hover:bg-gray-300/30 rounded-md p-1">
               <Heart className="w-[19px] h-[19px] stroke-[2px] mt-2" />

@@ -2,16 +2,20 @@ import Online from "./Online";
 import Offline from "./Offline";
 import { Search } from "iconoir-react";
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Icon = () => {
   return <Search className="w-[20px] pb-2" />;
 };
 
-interface Props {
-  isOnline: boolean;
-}
+export default function Navbar() {
+  const [token, setToken] = useState("");
 
-export default function Navbar(props: Props) {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setToken(token);
+  }, []);
+
   return (
     <nav className="container grid grid-cols-12 mx-auto h-14">
       <div className="flex items-center justify-between col-span-12 px-2 mx-6">
@@ -48,7 +52,7 @@ export default function Navbar(props: Props) {
             </button>
           </form>
         </div>
-        {props.isOnline ? <Online /> : <Offline />}
+        {token != null ? <Online /> : <Offline />}
       </div>
     </nav>
   );

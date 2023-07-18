@@ -22,7 +22,7 @@ export default function Home(props: Props) {
     fetch("http://localhost:8080/posts/")
       .then((response) => response.json())
       .then((response: PostState) => setPosts(response))
-      .catch((error) => alert("ERROR EN HOME"));
+      .catch(() => alert("ERROR EN HOME"));
   }, []);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function Home(props: Props) {
   return (
     <>
       <header className=" bg-white shadow-md">
-        <Navbar isOnline={true} />
+        <Navbar />
       </header>
 
       <div className="container mx-auto ">
@@ -128,7 +128,6 @@ export default function Home(props: Props) {
                           .includes(props.query?.toLowerCase() ?? "No Results")
                     )
                     .map((post) => {
-                      console.log("post Searched", post);
                       return <CardMain post={post} />;
                     })}
 

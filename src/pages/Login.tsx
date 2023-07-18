@@ -12,11 +12,7 @@ interface LoginData {
 
 export default function Login() {
   const navigate = useNavigate();
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm<LoginData>();
+  const { handleSubmit, register } = useForm<LoginData>();
 
   function onSubmit(data: LoginData) {
     fetch("http://localhost:8080/auth", {
@@ -29,7 +25,6 @@ export default function Login() {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("response:", response);
         if (response?.data) {
           localStorage.setItem("token", response?.data);
           //para sacar el token y utilizarlo en otro lugar
@@ -38,7 +33,7 @@ export default function Login() {
           /* localStorage.removeItem("token"); */
           navigate("/");
         } else {
-          toast.error("Incorrect Data");
+          toast.error("User not found");
         }
       })
       .catch(() => {
@@ -50,7 +45,7 @@ export default function Login() {
     <>
       <ToastContainer theme="dark" />
       <header className=" bg-white shadow-md">
-        <Navbar isOnline={false} />
+        <Navbar />
       </header>
       <div className="container mx-auto flex justify-center p-2">
         <nav className="flex flex-col w-[65%] col-span-1 border gap-2 bg-white rounded-xl shadow-md mx-80 my-10 p-6 justify-center">
@@ -98,7 +93,10 @@ export default function Login() {
               Have a password? Continue with your email address
             </p>
           </div>
-          <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="flex flex-col"
+            onSubmit={(event) => void handleSubmit(onSubmit)(event)}
+          >
             <label htmlFor="user_email" className="font-semibold mb-2">
               Email
             </label>

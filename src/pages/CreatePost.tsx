@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { CreatePostData, postSuccess } from "../types/common.types";
-import clsx from "clsx";
 import {
   Bold,
   Code,

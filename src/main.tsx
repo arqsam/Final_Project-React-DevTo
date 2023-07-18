@@ -14,13 +14,13 @@ const router = createBrowserRouter([
     errorElement: <h1>WIP NOT FOUND RIGHT NOW 404</h1>,
   },
   {
-    path: "/post",
-    element: <Post />,
+    path: "/create_post",
+    element: <CreatePost />,
     errorElement: <h1>WIP NOT FOUND RIGHT NOW 404</h1>,
   },
   {
-    path: "/create_post",
-    element: <CreatePost />,
+    path: "/post/:id",
+    element: <Post />,
     errorElement: <h1>WIP NOT FOUND RIGHT NOW 404</h1>,
   },
   {

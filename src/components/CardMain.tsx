@@ -13,7 +13,8 @@ export default function CardMain(props: Props) {
   useEffect(() => {
     fetch(`http://localhost:8080/users/${props.post.postOwner}`)
       .then((response) => response.json())
-      .then((response: UserState) => setPostOwner(response));
+      .then((response: UserState) => setPostOwner(response))
+      .catch(() => alert("ERROR IN CARD MAIN"));
   });
 
   return (

@@ -12,12 +12,7 @@ export interface Post {
   likes: number;
   bookmarks: number;
   postOwner: string;
-  hashtags: {
-    first: string;
-    second: string;
-    third: string;
-    fourth: string;
-  };
+  hashtags: Hashtags;
 }
 
 interface Hashtags {
@@ -33,6 +28,19 @@ export interface CreatePostData {
   postBody: string;
   postImg: string;
   hashtags: Hashtags;
+}
+
+export interface Comment {
+  _id: string;
+  commentFromPostWithIdentifier: string;
+  content: string;
+  commenterID: string;
+  commentDate: string;
+}
+
+export interface CommentsState {
+  success?: boolean;
+  data?: Comment[];
 }
 
 export interface postSuccess {
@@ -55,16 +63,24 @@ export interface User {
 }
 
 export interface UserState {
-  success: boolean;
+  success?: boolean;
   data?: User;
 }
 
 export interface PostState {
-  success: boolean;
+  success?: boolean;
   data?: Post[];
+}
+
+export interface Token {
+  id: string;
 }
 
 export interface LoginData {
   email: string;
   password: string;
+}
+export interface GetAPost {
+  success?: boolean;
+  data?: Post;
 }
