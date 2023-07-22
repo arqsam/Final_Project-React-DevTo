@@ -1,8 +1,10 @@
 import Online from "./Online";
 import Offline from "./Offline";
-import { Search } from "iconoir-react";
+import { Search, Cancel } from "iconoir-react";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import MenuHidden from "./menu/Menu";
+import HiddenMenu from "./HiddenMenu";
 
 const Icon = () => {
   return <Search className="w-[20px] pb-2" />;
@@ -10,6 +12,7 @@ const Icon = () => {
 
 export default function Navbar() {
   const [token, setToken] = useState("");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -21,11 +24,33 @@ export default function Navbar() {
       <div className="flex items-center justify-between col-span-12 px-2 mx-6">
         {/* //TODO: Create Onside Menu */}
         <div className="flex items-center w-1/3 gap-2">
-          <a className="p-2 space-y-1 rounded-md hover:bg-indigo-200/50 md:hidden">
-            <div className="w-5 h-0.5 bg-gray-600"></div>
-            <div className="w-5 h-0.5 bg-gray-600"></div>
-            <div className="w-5 h-0.5 bg-gray-600"></div>
-          </a>
+          <div className="md:hidden">
+            <button
+              className="p-2 mr-10 space-y-1 rounded-md hover:bg-indigo-200/50 md:hidden "
+              onClick={() => setOpen(true)}
+            >
+              <img src="../icons8-menú.svg" alt="menu" className="px-2 h-7" />
+            </button>
+            <div
+              className={`${
+                !open && "hidden"
+              } bg-white backdrop-blur-sm transition-all duration-700 shadow-2xl shadow-gray-800 min-h-screen w-[52%] fixed top-0 left-0 right-0`}
+            >
+              <div className="flex flex-row justify-between">
+                <h2 className="m-3 font-bold p-1 text-xl">DEV Community</h2>
+                <button
+                  className="m-3 p-1 hover:bg-indigo-200/40 rounded-md"
+                  onClick={() => setOpen(false)}
+                >
+                  <Cancel></Cancel>
+                </button>
+              </div>
+              <div className="mt-3">
+                <HiddenMenu></HiddenMenu>
+              </div>
+            </div>
+          </div>
+
           <NavLink to={"/"}>
             <img
               className="h-10"

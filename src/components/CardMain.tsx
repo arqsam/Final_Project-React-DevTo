@@ -61,10 +61,10 @@ export default function CardMain(props: Props) {
           <div className="flex flex-row rows-4 tracking-wide md:gap-3 ms:gap-1 mt-2 justify-between mb-4">
             <button className="flex flex-row gap-20 hover:bg-gray-300/30 rounded-md p-1">
               <div className="flex flex-row w-1 p-1">
-                <p className="w-7 bg-slate-400/20 rounded-full z-30">💖</p>
-                <p className="w-7 bg-slate-400/20 rounded-full z-20">🦄</p>
-                <p className="w-7 bg-slate-400/20 rounded-full z-10">🔥</p>
-                <p className="w-7 bg-slate-400/20 rounded-full z-0">🤯</p>
+                <p className="w-7 bg-slate-400/20 rounded-full ">💖</p>
+                <p className="w-7 bg-slate-400/20 rounded-full ">🦄</p>
+                <p className="w-7 bg-slate-400/20 rounded-full ">🔥</p>
+                <p className="w-7 bg-slate-400/20 rounded-full ">🤯</p>
               </div>
               <p className="mx-2 text-[14px] tracking-wide pt-2 hover:text-indigo-900 whitespace-nowrap">
                 {`${props.post.likes} Reactions`}
