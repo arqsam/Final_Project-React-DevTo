@@ -3,7 +3,7 @@ import Offline from "./Offline";
 import { Search, Cancel } from "iconoir-react";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import MenuHidden from "./menu/Menu";
+
 import HiddenMenu from "./HiddenMenu";
 
 const Icon = () => {
@@ -32,9 +32,10 @@ export default function Navbar() {
               <img src="../icons8-menú.svg" alt="menu" className="px-2 h-7" />
             </button>
             <div
+              id="hiddenbar"
               className={`${
                 !open && "hidden"
-              } bg-white backdrop-blur-sm transition-all duration-700 shadow-2xl shadow-gray-800 min-h-screen w-[52%] fixed top-0 left-0 right-0`}
+              } bg-white backdrop-blur-sm shadow-2xl shadow-gray-800 min-h-screen w-[52%] fixed top-0 left-0 right-0 transition-all duration-500 ease`}
             >
               <div className="flex flex-row justify-between">
                 <h2 className="m-3 font-bold p-1 text-xl">DEV Community</h2>

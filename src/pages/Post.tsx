@@ -78,7 +78,7 @@ export default function PostDetail() {
                 <img
                   src={user?.data?.picture}
                   alt="avatar"
-                  className=" rounded-full mt-z w-14 bg-white h-14 hover:outline hover:outline-indigo-200/50 border border-black"
+                  className=" rounded-full mt-z w-14 bg-white h-14 hover:outline hover:outline-indigo-200/50"
                 />
                 <h1 className="flex align-botom justify-center font-bold text-black/70 text-2xl mt-6">
                   {`${user?.data?.name.first} ${user?.data?.name.last}`}

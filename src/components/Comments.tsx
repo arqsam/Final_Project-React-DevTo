@@ -22,9 +22,9 @@ export default function Comments(props: Props) {
         <img
           src={user?.data.picture}
           alt="avatar"
-          className=" rounded-full mt-z w-10 h-10 hover:outline hover:outline-indigo-200/50 border border-black"
+          className=" rounded-full mt-z w-10 h-10 hover:outline hover:outline-indigo-200/50 "
         />
-        <div className="border border-gray-500/25 rounded-md w-[80%] px-4 py-3">
+        <div className="border border-gray-500/25 rounded-md w-full px-4 py-3">
           <button className="flex flex-row row-span-2">
             <a
               href=""

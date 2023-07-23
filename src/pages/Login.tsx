@@ -88,13 +88,17 @@ export default function Login() {
             Continue with Twitter{" "}
           </button>
           <div>
-            <div className="border-t mt-4 border-gray-600/30"></div>
-            <p className="flex h-5 bg-white justify-center text-sm text-gray-700/90">
-              Have a password? Continue with your email address
-            </p>
+            <div className=" flex justify-center border-t mt-6 border-gray-600/30">
+              <a
+                className=" h-6 align-middle relative top-[-11px] w-auto
+               bg-white text-sm text-gray-700/90  "
+              >
+                Have a password? Continue with your email address
+              </a>
+            </div>
           </div>
           <form
-            className="flex flex-col"
+            className="flex flex-col mt-7"
             onSubmit={(event) => void handleSubmit(onSubmit)(event)}
           >
             <label htmlFor="user_email" className="font-semibold mb-2">

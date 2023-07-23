@@ -8,7 +8,7 @@ interface Props {
 
 export default function MenuPost(props: Props) {
   return (
-    <main className="md:col-span-1 md:row-span-3 flex flex-col col-span-1 w-screen gap-3 m-[4rem] fixed">
+    <main className="md:col-span-1 md:row-span-3 flex flex-col col-span-1 w-auto gap-3 m-[4rem] fixed">
       <ul className="flex flex-col col-span-1 gap-8 ">
         <li>
           <button className="hover:text-red-600">
