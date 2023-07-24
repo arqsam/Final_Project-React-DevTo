@@ -15,7 +15,7 @@ export default function CardMain(props: Props) {
       .then((response) => response.json())
       .then((response: UserState) => setPostOwner(response))
       .catch(() => alert("ERROR IN CARD MAIN"));
-  });
+  }, [props]);
 
   return (
     <article className="flex flex-col columns-1 border rounded-xl  shadow-md mb-2 bg-white ">

@@ -6,6 +6,7 @@ import Post from "./pages/Post";
 import CreatePost from "./pages/CreatePost";
 import Login from "./pages/Login";
 import "./index.css";
+import EditPost from "./pages/EditPost";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
     errorElement: <h1>WIP NOT FOUND RIGHT NOW 404</h1>,
+  },
+  {
+    path: "/edit/:id",
+    element: <EditPost />,
   },
 ]);
 
