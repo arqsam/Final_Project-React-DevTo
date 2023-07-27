@@ -17,7 +17,6 @@ const Icon = () => {
 
 export default function Online() {
   const [loggedUser, setLoggedUser] = useState<UserState>();
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");

@@ -1,7 +1,8 @@
 import { Post, User, Comment } from "../types/common.types";
 import { Message, BookmarkEmpty } from "iconoir-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Comments from "./Comments";
+
 interface Props {
   userLogged?: string;
   content?: Post;
@@ -10,6 +11,30 @@ interface Props {
 }
 
 export default function CardMainPost(props: Props) {
+  const navigate = useNavigate();
+
+  /*   async function onDelete() {
+    const token =
+      localStorage.getItem("token") || sessionStorage.getItem("token");
+    await fetch(`http://localhost:8080/posts/${props.content?._id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token ?? 0}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log("RES:", res);
+        if (res.ok) {
+          alert("Post deleted successfully");
+        }
+        navigate("/");
+      })
+      .catch((error) => {
+        throw new Error("Something went wrong");
+      });
+  }
+ */
   return (
     <main className="col-span-12 row-span-3 md:col-span-7 md:col-start-3 md:row-span-3 ">
       <article className="flex flex-col columns-1 border rounded-xl bg-white shadow-sm mb-2">
@@ -67,6 +92,41 @@ export default function CardMainPost(props: Props) {
                   <i className="text-xl iconoir-edit-pencil" />
                   <p className="text-xs font-semibold">Edit Post</p>
                 </Link>
+                <button
+                  onClick={() => {
+                    const token =
+                      localStorage.getItem("token") ||
+                      sessionStorage.getItem("token");
+                    console.log("token:", token);
+                    const payload = JSON.parse(atob(token?.split(".")[1]));
+                    console.log("PAYLOAD:", payload);
+                    if (payload.id === props.postOwner?._id) {
+                      fetch(
+                        `http://localhost:8080/posts/${props.content?._id}`,
+                        {
+                          method: "DELETE",
+                          headers: {
+                            Authorization: `Bearer ${token ?? 0}`,
+                          },
+                        }
+                      )
+                        .then((res) => {
+                          console.log("RES:", res);
+                          if (res.ok) {
+                            alert("Post successfully deleted");
+                            navigate("/");
+                          }
+                        })
+                        .catch((error) => {
+                          throw new Error("Something went wrong");
+                        });
+                    }
+                  }}
+                  className="flex items-center gap-3 p-1 rounded hover:bg-indigo-200/30 hover:text-indigo-600"
+                >
+                  <i className="text-xl iconoir-edit-pencil" />
+                  <p className="text-xs font-semibold">Delete Post</p>
+                </button>
               </div>
             )}
 
