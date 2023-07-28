@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MenuPost from "../components/MenuPost";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import TimeAgo from "react-timeago";
 import CardAsidePost from "../components/CardAsidePost";
 import {
   UserState,
@@ -103,9 +104,12 @@ export default function PostDetail() {
                   <p className="text-[12px] font-semibold text-black/90">
                     JOINED
                   </p>
-                  <p className="text-[12px] font-semibold">{`${
-                    user?.data?.joined ?? "1688927282"
-                  }`}</p>
+                  <p className="text-[12px] font-semibold">
+                    <TimeAgo
+                      data={`${user?.data?.joined ?? "1688927282"}`}
+                      className="px-1 text-xs text-gray-500 hover:text-black"
+                    />
+                  </p>
                 </div>
               </p>
             </article>

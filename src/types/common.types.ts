@@ -76,9 +76,16 @@ export interface Token {
   id: string;
 }
 
+export interface Auth {
+  success: boolean;
+  data?: string;
+  message?: string;
+}
+
 export interface LoginData {
   email: string;
   password: string;
+  username: string;
 }
 export interface GetAPost {
   success?: boolean;

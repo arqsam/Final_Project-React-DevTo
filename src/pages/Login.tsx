@@ -43,7 +43,7 @@ export default function Login() {
 
   return (
     <>
-      <ToastContainer theme="dark" />
+      <ToastContainer theme="light" />
       <header className=" bg-white shadow-md">
         <Navbar />
       </header>

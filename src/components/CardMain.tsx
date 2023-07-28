@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { BookmarkEmpty, Message } from "iconoir-react";
 import { Post, UserState } from "../types/common.types";
 import { Link } from "react-router-dom";
+import TimeAgo from "react-timeago";
 
 interface Props {
   post: Post;
@@ -35,7 +36,9 @@ export default function CardMain(props: Props) {
               {`${postOwner?.data?.name.first} 
               ${postOwner?.data?.name.last}`}
             </a>
-            <p className="text-[12px] ">{props.post.postDate}</p>
+            <p className="text-[12px] ">
+              <TimeAgo date={props.post.postDate} />
+            </p>
           </button>
         </div>
         <div className="pl-[4rem]">

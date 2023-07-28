@@ -2,6 +2,7 @@ import { Post, User, Comment } from "../types/common.types";
 import { Message, BookmarkEmpty } from "iconoir-react";
 import { Link, useNavigate } from "react-router-dom";
 import Comments from "./Comments";
+import TimeAgo from "react-timeago";
 
 interface Props {
   userLogged?: string;
@@ -13,28 +14,6 @@ interface Props {
 export default function CardMainPost(props: Props) {
   const navigate = useNavigate();
 
-  /*   async function onDelete() {
-    const token =
-      localStorage.getItem("token") || sessionStorage.getItem("token");
-    await fetch(`http://localhost:8080/posts/${props.content?._id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token ?? 0}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        console.log("RES:", res);
-        if (res.ok) {
-          alert("Post deleted successfully");
-        }
-        navigate("/");
-      })
-      .catch((error) => {
-        throw new Error("Something went wrong");
-      });
-  }
- */
   return (
     <main className="col-span-12 row-span-3 md:col-span-7 md:col-start-3 md:row-span-3 ">
       <article className="flex flex-col columns-1 border rounded-xl bg-white shadow-sm mb-2">
@@ -58,7 +37,7 @@ export default function CardMainPost(props: Props) {
                 {`${props.postOwner?.name.first} ${props.postOwner?.name.last}`}
               </a>
               <p className="px-1 text-xs text-gray-500 hover:text-black">
-                {props.content?.postDate}
+                <TimeAgo date={props.content?.postDate} />
               </p>
             </button>
           </div>
